@@ -1,0 +1,58 @@
+.sidenav {
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 8px;
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(210,210,210);
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 220px;
+    padding: 10px;
+}
+
+.errMsg {
+    color: red;
+    font-size: 14px !important;
+    padding: 0px;
+    margin: 0px 0px 4px 0px !important;
+}
+
+#footer-container {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+.Elf {
+	margin: 0px !important;
+	padding: 2px !important;
+	background-color: rgba(15, 140, 15, 100) !important;
+}
+
+.Orc {
+	margin: 0px !important;
+	padding: 2px !important;
+	background-color: rgba(150, 30, 20, 100) !important;
+}
+
+.Human {
+	margin: 0px !important;
+	padding: 2px !important;
+	background-color: rgba(10, 60, 150, 100) !important;
+}

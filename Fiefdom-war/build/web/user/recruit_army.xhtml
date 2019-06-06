@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/template/base.xhtml">
+            <!-- side nav bar -->
+            <ui:define name="leftnav">
+                <ui:include src="/template/leftnavgame.xhtml" />
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="row justify-content-center">
+                    <h1>Recruitment</h1>
+                </div>
+
+				<!-- Available Resources -->
+				<div class="row justify-content-center">
+					<h:panelGrid columns="4" border="1" cellpadding = "10">
+						<h:panelGroup>Gold: </h:panelGroup>
+						<h:panelGroup>#{recruitMBean.gold}</h:panelGroup>
+
+						<h:panelGroup>Peasants: </h:panelGroup>
+						<h:panelGroup>#{recruitMBean.peasants}</h:panelGroup>
+					</h:panelGrid>
+				</div>
+
+				<div class="row justify-content-center">
+					<h:outputText id="requiredgold" value="Required Gold: #{recruitMBean.requiredGold}" />
+				</div>
+				<div class="row justify-content-center">
+					<h:outputText id="requiredfreeland" value="Required Peasants: #{recruitMBean.requiredPeasants}" />
+				</div>
+
+                <!-- ARMY RECRUITMENT TABLE -->
+				<div class="row justify-content-center">
+					<h:form>
+						<div class="form-group">
+							<table class="table table-dark">
+								<thead>
+									<th scope="col">Unit</th>
+									<th scope="col">Recruited</th>
+									<th scope="col">Unit Cost</th>
+									<th scope="col">Amount</th>
+									<th scope="col">Total Cost</th>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">Archers</th>
+										<td>#{recruitMBean.recruitedArchers}</td>
+										<td>#{recruitMBean.archerCost}</td>
+										<td>
+											<h:inputText id="archerstorecruit" value="#{recruitMBean.archersToRecruit}" size="5" maxlength="5">
+												<f:ajax listener="#{recruitMBean.totalArchersCostChanged}" render="totalarcherscost" />
+												<f:ajax listener="#{recruitMBean.requiredGoldChanged}" render="requiredgold" />
+												<f:ajax listener="#{recruitMBean.requiredPeasantsChanged}" render="requiredfreeland" />
+											</h:inputText>
+											<h:message for="archerstorecruit"/>
+										</td>
+										<td>
+											<h:outputText id="totalarcherscost" value="#{recruitMBean.totalArchersCost}" />
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">Spearmen</th>
+										<td>#{recruitMBean.recruitedSpears}</td>
+										<td>#{recruitMBean.spearCost}</td>
+										<td>
+											<h:inputText id="totalspearstorecruit" value="#{recruitMBean.spearsToRecruit}" size="5" maxlength="5">
+												<f:ajax listener="#{recruitMBean.totalSpearsCostChanged}" render="totalspearscost" />
+												<f:ajax listener="#{recruitMBean.requiredGoldChanged}" render="requiredgold" />
+												<f:ajax listener="#{recruitMBean.requiredPeasantsChanged}" render="requiredfreeland" />
+											</h:inputText>
+											<h:message for="totalspearscost"/>
+										</td>
+										<td>
+											<h:outputText id="totalspearscost" value="#{recruitMBean.totalSpearsCost}" />
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">Knights</th>
+										<td>#{recruitMBean.recruitedKnights}</td>
+										<td>#{recruitMBean.knightCost}</td>
+										<td>
+											<h:inputText id="totalknightstorecruit" value="#{recruitMBean.knightsToRecruit}" size="5" maxlength="5">
+												<f:ajax listener="#{recruitMBean.totalKnightsCostChanged}" render="totalknightscost" />
+												<f:ajax listener="#{recruitMBean.requiredGoldChanged}" render="requiredgold" />
+												<f:ajax listener="#{recruitMBean.requiredPeasantsChanged}" render="requiredfreeland" />
+											</h:inputText>
+											<h:message for="totalknightscost"/>
+										</td>
+										<td>
+											<h:outputText id="totalknightscost" value="#{recruitMBean.totalKnightsCost}" />
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">Wizards</th>
+										<td>#{recruitMBean.recruitedWizards}</td>
+										<td>#{recruitMBean.wizardCost}</td>
+										<td>
+											<h:inputText id="totalwizardstorecruit" value="#{recruitMBean.wizardsToRecruit}" size="5" maxlength="5">
+												<f:ajax listener="#{recruitMBean.totalWizardsCostChanged}" render="totalwizardscost" />
+												<f:ajax listener="#{recruitMBean.requiredGoldChanged}" render="requiredgold" />
+												<f:ajax listener="#{recruitMBean.requiredPeasantsChanged}" render="requiredfreeland" />
+											</h:inputText>
+											<h:message for="totalwizardscost"/>
+										</td>
+										<td>
+											<h:outputText id="totalwizardscost" value="#{recruitMBean.totalWizardsCost}" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="row justify-content-center">
+							<h:commandButton id="Build" value="Recruit" class="btn btn-primary" action="#{recruitMBean.recruit()}"/>
+						</div>
+					</h:form>
+				</div>
+            </ui:define>
+
+            <ui:define name="footer"></ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

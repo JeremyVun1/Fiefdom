@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="../template/base.xhtml">
+        <ui:define name="content">
+            <ui:param name="fId" value="#{fiefdomInfoMBean.id}" />
+
+            <div class="row justify-content-center">
+                <h1>Welcome user #{sessMBean.username}!</h1>
+            </div>
+            <div class="row justify-content-center m-4">
+                <h:panelGrid columns="2" border="1" cellpadding = "3">
+                    <h:panelGroup>Fiefdom Name</h:panelGroup>
+                    <h:panelGroup>#{fiefdomInfoMBean.getfName()}</h:panelGroup>
+
+                    <h:panelGroup>Race</h:panelGroup>
+                    <h:panelGroup>#{fiefdomInfoMBean.race}</h:panelGroup>
+
+                    <h:panelGroup>Gold</h:panelGroup>
+                    <h:panelGroup>#{fiefdomInfoMBean.gold}</h:panelGroup>
+
+                    <h:panelGroup>Land</h:panelGroup>
+                    <h:panelGroup>#{fiefdomInfoMBean.land}</h:panelGroup>
+
+                    <h:panelGroup>Peasants</h:panelGroup>
+                    <h:panelGroup>#{fiefdomInfoMBean.peasants}</h:panelGroup>
+                </h:panelGrid>
+            </div>
+            <div class="row justify-content-center m-4">
+                <a href="/Fiefdom-war/userandsuspended/main.xhtml" class="btn btn-success btn-lrg">Go to Fiefdom</a>
+            </div>
+        </ui:define>
+        
+        <ui:define name="footer">           
+        </ui:define>
+    </ui:composition>
+</html>
+

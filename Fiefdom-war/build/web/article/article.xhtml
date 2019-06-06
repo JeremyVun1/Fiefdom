@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="../template/base.xhtml">
+
+            <!-- ARTICLE HEADER -->
+            <ui:define name="header">
+                <h1>#{articleMBean.getTitle()}</h1>
+            </ui:define>
+            
+            <!-- ARTICLE CONTENT-->
+            <ui:define name="content">
+                <hr />
+                <div class="row " style="font-size: 12px; font-style: italic">
+                    posted: #{articleMBean.getPosted()}
+                </div>
+                <hr />
+                <div class="row">
+                    #{articleMBean.getBody()}
+                </div>                
+                <div class="row justify-content-center mt-3">
+                    <a href="/Fiefdom-war/index.xhtml" class="btn btn-primary btn-lrg">back to main menu</a>
+                </div>
+
+            </ui:define>
+            
+            <ui:define name="footer">
+                <!-- news -->
+                <div class="row mt-5">
+                    <div class="col border border-primary">
+                        <h:dataTable value = "#{articleFeedMBean.articleShorts}" var = "articleShort"
+                                     styleClass = "newsTable"
+                                     headerClass = "newsTableHeader"
+                                     rowClasses = "newsTableOddRow,newsTableEvenRow">
+
+                            <h:column>    				
+                                <f:facet name = "header">Date</f:facet>
+                                    #{articleShort.ddmmyyyy()}
+                            </h:column>
+
+                            <h:column class="mx-5">
+                                <f:facet name = "header">Title</f:facet>
+                                <a href="#{articleShort.getLink()}">#{articleShort.title}</a>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+
+                    <!--status info-->
+                    <div class="col border border-primary">
+                        <h:panelGrid columns="2" border="1" cellpadding = "10">
+                            <h:panelGroup>Players Online:</h:panelGroup>
+                            <h:panelGroup>#{serverStatMBean.onlineCount}</h:panelGroup>
+
+                            <h:panelGroup>Fiefdom is currently:</h:panelGroup>
+                            <h:panelGroup>#{serverStatMBean.serverStatus()}</h:panelGroup>
+
+                            <h:panelGroup>Server Time:</h:panelGroup>
+                            <h:panelGroup>#{serverStatMBean.systemTime}</h:panelGroup>
+                        </h:panelGrid>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

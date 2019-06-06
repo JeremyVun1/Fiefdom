@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/template/base.xhtml">
+            <!-- side nav bar -->
+            <ui:define name="leftnav">
+                <c:if test="#{not accountMBean.suspended}">
+                    <ui:include src="/template/leftnavgame.xhtml" />
+                </c:if>
+            </ui:define>
+
+            <ui:define name="header"></ui:define>
+
+            <!-- content -->
+            <ui:define name="content">
+                <c:choose>
+                    <c:when test="#{accountMBean.suspended}">
+                        <div class="row justify-content-center">
+                            <h1>YOUR ACCOUNT IS SUSPENDED</h1>
+                        </div>
+                        <div class="row justify-content-center">
+                            <h:form>
+                                <h:commandButton value="Logout" action="#{loginMBean.logout()}"  class="btn btn-warning btn-block"/>           
+                            </h:form>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- FIEFDOM MAIN STAT SCREEN -->
+                        <div class="row justify-content-center">
+                            <h:graphicImage library="images" name="castle.png" class="img-fluid"/>
+                        </div>
+                        <div class="row justify-content-center">
+                            <h1>#{fiefdomInfoMBean.getfName()} (##{fiefdomInfoMBean.id})</h1>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <table class="table-dark" style="border: 1px solid white">
+                                <tbody>
+                                    <tr>
+                                        <th>Power:</th>
+                                        <td>#{fiefdomInfoMBean.power}</td>
+                                        <th>Rank:</th>
+                                        <td>#{fiefdomInfoMBean.rank}</td>
+                                    </tr>                                
+                                    <tr>
+                                        <th>Land:</th>
+                                        <td>#{fiefdomInfoMBean.land}</td>
+                                        <th>Race:</th>
+                                        <td>#{fiefdomInfoMBean.race}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gold:</th>
+                                        <td>#{fiefdomInfoMBean.gold}</td>
+                                        <th>Peasants:</th>
+                                        <td>#{fiefdomInfoMBean.peasants}</td>
+                                    </tr>
+                                    <tr>
+										<th class="text-center" style="border: 1px solid white" colspan="4">Buildings:</th>
+									</tr>
+                                    <tr>
+                                        <td style="border: 1px solid white">Farms: #{buildingsMBean.builtFarms}</td>
+                                        <td style="border: 1px solid white">Markets: #{buildingsMBean.builtMarkets}</td>
+                                        <td style="border: 1px solid white">Mines: #{buildingsMBean.builtMines}</td>
+                                        <td style="border: 1px solid white">Towers: #{buildingsMBean.builtTowers}</td>
+                                    </tr>
+                                    <tr>
+										<th class="text-center" style="border: 1px solid white" colspan="4">Army:</th>
+									</tr>
+                                    <tr>
+                                        <td style="border: 1px solid white">Knights: #{recruitMBean.recruitedKnights}</td>
+                                        <td style="border: 1px solid white">Archers: #{recruitMBean.recruitedArchers}</td>
+                                        <td style="border: 1px solid white">Spears: #{recruitMBean.recruitedSpears}</td>
+                                        <td style="border: 1px solid white">Wizards: #{recruitMBean.recruitedWizards}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- TURN COUNT -->
+                        <div class="row justify-content-center mt-3">
+                            Turn #{serverStatMBean.turnCount}
+                        </div>
+
+                        <!-- DATE TIME -->
+                        <div class="row justify-content-center mt-3">
+                            Current Time: #{sessMBean.timestamp}
+                        </div>
+						
+						<!-- NEXT TURN DATE TIME-->
+                        <div class="row justify-content-center mt-3">
+							Next Turn: #{sessMBean.getNextTurnDate()}
+						</div>
+
+                        <!-- EVENTS LOG -->
+						<div class="row justify-content-center mt-3">
+							 EVENTS
+						</div>
+                        <div class="row justify-content-center mt-2">
+                            <h:dataTable value = "#{eventLogMBean.logs}" var = "turn"
+                                         rendered="#{eventLogMBean.logs.size() > 0}"
+                                         border="1">
+                                
+                                <h:column>
+                                    <p class="text-center m-1"><h:outputText value="Turn #{turn.turn}" /></p>
+									<table border="1">
+										<tr>
+											<td><p class="m-1">gold: #{turn.goldStr}</p></td>
+											<td><p class="m-1">land: #{turn.landStr}</p></td>
+											<td><p class="m-1">peasants: #{turn.peasantsStr}</p></td>
+										</tr>
+									</table>
+                                    
+                                    <h:dataTable value="#{turn.events}" var="event"
+                                                 rendered="#{turn.events.size() > 0}">
+										<h:column>
+                                        <p class="m-1"><h:outputText value="#{event.eventString}" /></p>
+										</h:column>
+                                    </h:dataTable>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </ui:define>
+
+            <ui:define name="footer"></ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

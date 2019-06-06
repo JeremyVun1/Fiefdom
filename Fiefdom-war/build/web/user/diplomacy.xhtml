@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Diplomacy</title>
+    </h:head>
+    <ui:composition template="../template/base.xhtml">
+        <!-- side nav bar -->
+        <ui:define name="leftnav">
+            <ui:include src="../template/leftnavgame.xhtml" />
+        </ui:define>
+
+        <ui:define name="header">
+            <div class="justify-content-center row">
+                <h:graphicImage library="images" name="castle.png" class="img-fluid"/>
+            </div>
+        </ui:define>
+
+        <ui:define name="content">
+            <div class="row justify-content-center">
+                <h1>Diplomacy</h1>
+            </div>
+
+
+			<!-- SEND MESSAGE TO OTHER PLAYER -->
+			<div class="row justify-content-center">
+				<a href="create_message.xhtml" class="btn btn-success">Compose Message</a>
+			</div>
+
+			<!-- INBOX -->
+			<div class="row justify-content-center mt-5">
+				<h1>INBOX</h1>
+			</div>
+			<div class="row justify-content-center">
+				<h:dataTable value = "#{inboxMBean.threads}" var = "thread" border="1">
+					<h:column>
+						<f:facet name="header">Date</f:facet>
+						<div class="m-1">#{thread.posted}</div>
+					</h:column>
+					<h:column>
+						<f:facet name="header">From</f:facet>
+							<div class="m-1">(##{thread.fromId}) #{thread.fromName}</div>
+					</h:column>
+					<h:column>
+						<f:facet name="header">To</f:facet>
+							<div class="m-1">(##{thread.toId}) #{thread.toName}</div>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Subject</f:facet>
+						<div class="m-1"><a href="#{thread.link}" >#{thread.subject}</a></div>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Type</f:facet>
+							<div class="m-1">#{thread.typeFullStr}</div>
+					</h:column>
+				</h:dataTable>
+			</div>
+
+			<!-- RELATIONS DATA TABLES -->
+			<!-- WAR -->
+			<div class="row justify-content-center mt-5">
+				AT WAR
+			</div>
+			<div class="row justify-content-center">
+				<h:dataTable value = "#{relationsMBean.wars}" var = "enemy" border="1">
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+						<div class="m-1">#{enemy.id}</div>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Fiefdom</f:facet>
+							<div class="m-1">#{enemy.name}</div>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Power</f:facet>
+							<div class="m-1">#{enemy.power}</div>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Rank</f:facet>
+							<div class="m-1">#{enemy.rank}</div>
+					</h:column>
+				</h:dataTable>
+			</div>
+
+			<!-- ALLIANCES -->
+			<div class="row justify-content-center mt-3">
+				ALLIANCE
+			</div>
+			<div class="row justify-content-center">
+				<h:dataTable value = "#{relationsMBean.alliances}" var = "ally" border="1">
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+							#{ally.id}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Fiefdom</f:facet>
+							#{ally.name}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Power</f:facet>
+							#{ally.power}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Rank</f:facet>
+							#{ally.rank}
+					</h:column>
+				</h:dataTable>
+			</div>
+        </ui:define>
+
+        <!-- no footer -->
+        <ui:define name="footer">       
+        </ui:define>
+    </ui:composition>
+</html>
+

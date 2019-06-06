@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="../template/base.xhtml">
+
+            <!-- THREAD SUBJECT -->
+            <ui:define name="header">
+                <h1>THREAD</h1>
+            </ui:define>
+
+            <!-- THREAD INFORMATION -->
+            <ui:define name="content">
+				<div class="row justify-content-center">
+					<h2>SUBJECT: #{viewThreadMBean.thread.subject}</h2>
+				</div>
+				<div class="row justify-content-center" style="font-size: 14px; font-style: italic">
+                    FROM: (##{viewThreadMBean.thread.fromId}) #{viewThreadMBean.threadAuthor}
+                </div>
+                <div class="row justify-content-center" style="font-size: 14px; font-style: italic">
+                    TYPE: [#{viewThreadMBean.typeFullStr}]
+                </div>
+				<hr />
+
+				<!-- MESSAGES THAT REQUIRE ACTIONS -->
+				<h:panelGroup rendered="#{viewThreadMBean.responseRequired}" >
+					<div class="row justify-content-center">
+						<h:form>
+							<h:commandButton id="accept" value="Accept" class="btn btn-primary btn-sm" action="#{viewThreadMBean.accept()}"/>
+							<h:commandButton id="decline" value="Decline" class="btn btn-primary btn-sm" action="#{viewThreadMBean.decline()}"/>
+						</h:form>
+					</div>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{!viewThreadMBean.responseRequired}" >
+					<div class="row justify-content-center">
+					<h:form>
+						<h:commandButton id="delete" value="DELETE" class="btn btn-primary btn-sm" action="#{viewThreadMBean.delete()}"/>
+					</h:form>
+				</div>
+				</h:panelGroup>
+                <hr />
+
+				<!-- MESSAGES -->
+				<div class="row justify-content-center" style="word-wrap: break-word">
+					<h:dataTable value = "#{viewThreadMBean.messages}" var = "message" border="1" >
+						<h:column>
+							<f:facet name = "header">Author</f:facet>
+							<p class="m-0 p-0" style="font-size: 14px; font-style: italic">(##{message.authorId}) #{message.authorName}</p>
+							<p class="m-0 mt-2 p-0">Posted:</p>
+							<p class="m-0 p-0" style="font-size: 14px; font-style: italic">#{message.posted}</p>
+						</h:column>
+						<h:column>
+							<f:facet name = "header">Message</f:facet>
+							<h:outputText value="#{message.message}"/>
+						</h:column>
+						<hr/>
+					</h:dataTable>
+				</div>
+
+				<!-- COMPOSE REPLY -->
+				<div class="row justify-content-center mt-3">
+					REPLY
+				</div>
+				<div class="row justify-content-center">
+					<h:form style="width: 80%">
+						<!-- BODY -->
+						<div class="form-group">
+							<h:outputLabel value="Body:"/>
+							<h:inputTextarea id="body" value="#{viewThreadMBean.body}" class="form-control" rows="10"/>
+							<p class="text-right errMsg">&nbsp;<h:message for="body"/></p>
+						</div>
+						<div class="float-right">
+							<h:commandButton id="submit" value="Reply" class="btn btn-primary btn-sm" action="#{viewThreadMBean.reply()}"/>
+						</div>
+					</h:form>
+				</div>
+
+                <div class="row justify-content-center mt-3">
+                    <a href="/Fiefdom-war/user/diplomacy.xhtml" class="btn btn-primary btn-lrg">Back to Diplomacy</a>
+                </div>
+
+            </ui:define>
+
+			<!-- no footer -->
+            <ui:define name="footer"></ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition template="template/base.xhtml">
+
+            <ui:define name="content">
+                #{testMBean.test()}
+                
+                <!-- already logged in, do not render login form -->
+                <h:panelGroup rendered="#{sessMBean.loggedIn}">
+                    <div class="row justify-content-center mt-4">
+                        <a class="btn btn-success btn-large" href="userandsuspended/main.xhtml">Back to Fiefdom</a>
+                    </div>
+
+                    <div class="row justify-content-center m-2">
+                        <h:form>
+                            <h:commandButton value="Logout" action="#{loginMBean.logout()}"  class="btn btn-warning btn-block"/>           
+                        </h:form>
+                    </div>
+
+                </h:panelGroup>
+
+                <!-- not logged in, render login form -->
+                <h:panelGroup rendered="#{not sessMBean.loggedIn}">
+                    <div class="justify-content-center row pt-4">
+                        <h:form>
+                            <h:outputLabel for="username" value="Username" class="pr-1" />
+                            <h:inputText id="username" value="#{loginMBean.username}" class="form-control"
+                                         required="true"
+                                         size="20"             
+                                         label = "Username"
+                                         />
+                            <p class="text-right errMsg">&nbsp;<h:message for="username"/></p>
+
+                            <h:outputLabel for="password" value="Password" class="pr-1" />
+                            <h:inputSecret id="password" value="#{loginMBean.password}" class="form-control" 
+                                           required="true"
+                                           size="20"
+                                           label = "Password"
+                                           />
+                            <p class="text-right errMsg">&nbsp;<h:message for="password"/></p>
+
+                            <div class="row d-flex justify-content-center">
+                                <h:form>
+                                    <h:commandButton type="submit" class="btn btn-primary btn-sm" value="Login" action="#{loginMBean.login()}"/>
+                                    &nbsp;
+                                    <h:commandButton type="reset" class="btn btn-primary btn-sm" value="Reset"/>
+                                </h:form>
+                            </div>
+                        </h:form>
+                    </div>
+
+                    <!-- signup link -->
+                    <div class="justify-content-center row m-3">
+                        <a class="btn btn-success btn-lrg" href="sign_up.xhtml">Sign up</a>
+                    </div>
+                </h:panelGroup>
+            </ui:define>
+
+            <!-- footer -->
+            <ui:define name="footer">
+                <!-- news -->
+                <div class="row">
+                    <div class="col border border-primary">
+                        <h:dataTable value = "#{articleFeedMBean.articleShorts}" var = "articleShort"
+                                     styleClass = "newsTable"
+                                     headerClass = "newsTableHeader"
+                                     rowClasses = "newsTableOddRow,newsTableEvenRow">
+
+                            <h:column>    				
+                                <f:facet name = "header">Date</f:facet>    				
+                                    #{articleShort.ddmmyyyy()}
+                            </h:column>
+
+                            <h:column class="mx-5">
+                                <f:facet name = "header">Title</f:facet>
+                                <a href="#{articleShort.getLink()}">#{articleShort.title}</a>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+
+                    <!--status info-->
+                    <div class="col border border-primary">
+                        <h:panelGrid columns="2" border="1" cellpadding = "10">
+                            <h:panelGroup>Players Online:</h:panelGroup>
+                            <h:panelGroup>#{serverStatMBean.onlineCount}</h:panelGroup>
+
+                            <h:panelGroup>Fiefdom is currently:</h:panelGroup>
+                            <h:panelGroup>#{serverStatMBean.serverStatus()}</h:panelGroup>
+
+                            <h:panelGroup>Server Time:</h:panelGroup>
+                            <h:panelGroup>#{serverStatMBean.systemTime}</h:panelGroup>
+                        </h:panelGrid>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
+

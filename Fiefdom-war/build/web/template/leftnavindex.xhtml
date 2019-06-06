@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/index.xhtml">Home</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/encyclopedia.xhtml">Encyclopedia</a>
+            <!--
+				<a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/manual.xhtml">Manual</a>
+				<a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/forum.xhtml">Forum</a>
+			-->
+
+            <!-- contextual navigation based on whether client is logged in as user or admin -->
+            <c:if test="#{sessMBean.loggedIn}">
+                <h:panelGroup rendered="#{accountMBean.isAdmin()}">
+                    <a class="btn btn-outline-success btn-block" href="/Fiefdom-war/admin/admin.xhtml">Admin</a>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{accountMBean.isUser()}">
+                    <a class="btn btn-outline-success btn-block" href="/Fiefdom-war/userandsuspended/main.xhtml">Game Main</a>
+                </h:panelGroup>
+			</c:if>
+        </ui:composition>
+    </h:body>
+</html>
+

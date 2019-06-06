@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/template/base.xhtml">
+            <!-- side nav bar -->
+            <ui:define name="leftnav">
+                <ui:include src="/template/leftnavgame.xhtml" />
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="row justify-content-center">
+                    <h1>War</h1>
+                </div>
+
+				<div class="row justify-content-center">
+					<h:form>
+						<!-- AVAILABLE WAR TARGETS -->
+						<div class="form-group">
+							<h:outputText id="explore" value="War Targets:"/>
+							<h:selectOneMenu value="#{warMBean.target}" class="form-control">
+								<f:selectItems value="#{warMBean.targets}" var="f" itemLabel="#{f.name}" itemValue="#{f.id}" />
+                            </h:selectOneMenu>
+						</div>
+
+						<!-- SELECT UNITS TO SEND -->
+						<div class="form-group">
+							<table class="table table-dark">
+								<thead>
+									<th scope="col">Unit</th>
+									<th scope="col">Recruited</th>
+									<th scope="col">Amount to send</th>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">Archers</th>
+										<td>#{warMBean.archers}</td>
+										<td>
+											<h:inputText id="archerstosend" value="#{warMBean.archersToSend}" size="5" maxlength="5">
+												<f:ajax listener="#{warMBean.archersChanged}" render="archerstosend" />
+											</h:inputText>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">Spearmen</th>
+										<td>#{warMBean.spears}</td>
+										<td>
+											<h:inputText id="spearstosend" value="#{warMBean.spearsToSend}" size="5" maxlength="5">
+												<f:ajax listener="#{warMBean.spearsChanged}" render="spearstosend" />
+											</h:inputText>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">Knights</th>
+										<td>#{warMBean.knights}</td>
+										<td>
+											<h:inputText id="knightstosend" value="#{warMBean.knightsToSend}" size="5" maxlength="5">
+												<f:ajax listener="#{warMBean.knightsChanged}" render="knightstosend" />
+											</h:inputText>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">Wizards</th>
+										<td>#{warMBean.wizards}</td>
+										<td>
+											<h:inputText id="wizardstosend" value="#{warMBean.wizardsToSend}" size="5" maxlength="5">
+												<f:ajax listener="#{warMBean.wizardsChanged}" render="wizardstosend" />
+											</h:inputText>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="row justify-content-center">
+							<h:commandButton id="Build" value="Attack" class="btn btn-primary" action="#{warMBean.attack()}"/>
+						</div>
+					</h:form>
+				</div>
+            </ui:define>
+
+            <ui:define name="footer"></ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:body>
+        <ui:composition>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/userandsuspended/main.xhtml">Main</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/user/diplomacy.xhtml">Diplomacy</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/user/buildings.xhtml">Construct Buildings</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/user/recruit_army.xhtml">Recruit Army</a>
+			<a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/user/explore.xhtml">Explore Land</a>
+			<a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/user/war.xhtml">War</a>
+			<a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/user/battle_reports.xhtml">Battle Reports</a>
+			<a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/user/search_fiefdom.xhtml">Search Players</a>
+			<a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/user/rankings.xhtml">Rankings</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/user/account.xhtml">Account</a>
+            <div style="padding: 6px 0px 6px 0px">
+                <h:form>
+                    <h:commandButton value="Logout" action="#{loginMBean.logout()}"  class="btn btn-outline-warning btn-block"/>           
+                </h:form>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Admin Panel</title>
+    </h:head>
+    <ui:composition template="../template/base.xhtml">
+        <!-- side nav bar -->
+        <ui:define name="leftnav">
+            <ui:include src="../template/leftnavadmin.xhtml" />
+        </ui:define>
+
+        <ui:define name="header">
+            <div class="justify-content-center row">
+                <h:graphicImage library="images" name="castle.png" class="img-fluid"/>
+            </div>
+        </ui:define>
+
+        <ui:define name="content">
+            <div class="row justify-content-center">
+                <h1>User Suspensions</h1>
+            </div>
+
+            <!-- SUSPEND USER FORM -->
+            <div class="row justify-content-center">
+
+                <div class="col" >
+                    <div class="row justify-content-center">
+                        <h3>Choose a user to Suspend</h3>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h:form>
+                            <div class="form-group">
+                                <h:outputLabel value="Users"/>
+                                <h:selectOneMenu value="#{suspendUserMBean.username}" class="form-control">
+                                    <f:selectItems value="#{suspendUserMBean.unsuspended}" var="u" itemLabel="#{u.username}" itemValue="#{u.username}" />
+                                </h:selectOneMenu>
+                                <h:commandButton id="chooseList" value="Suspend" class="btn btn-primary btn-sm" action="#{suspendUserMBean.suspendUser()}"/>
+                            </div>                    
+                        </h:form>
+                    </div>
+                    <div class="row justify-content-center mt-3">
+                        <h3>OR enter a username</h3>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h:form>
+                            <div class="form-group">
+                                <h:outputLabel value="Username"/>
+                                <h:inputText title="username" id="username" class="form-control"
+                                             validator="#{suspendUserMBean.isExistingUser}"
+                                             value="#{suspendUserMBean.username}"/>
+                                <p class="text-right errMsg">&nbsp;<h:message for="username"/></p>
+                                <h:commandButton id="chooseManual" value="Suspend" class="btn btn-primary btn-sm" action="#{suspendUserMBean.suspendUser()}"/>
+                            </div>                    
+                        </h:form>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <!-- UNSUSPEND USER FORM -->
+                    <div class="row justify-content-center">
+                        <div class="col" >
+                            <div class="row justify-content-center">
+                                <h3>Choose a user to Unsuspend</h3>
+                            </div>
+                            <div class="row justify-content-center">
+                                <h:form>
+                                    <div class="form-group">
+                                        <h:outputLabel value="Users"/>
+                                        <h:selectOneMenu value="#{suspendUserMBean.username}" class="form-control">
+                                            <f:selectItems value="#{suspendUserMBean.suspended}" var="u" itemLabel="#{u.username}" itemValue="#{u.username}" />
+                                        </h:selectOneMenu>
+                                        <h:commandButton id="chooseList" value="Unsuspend" class="btn btn-primary btn-sm" action="#{suspendUserMBean.unsuspendUser()}"/>
+                                    </div>                    
+                                </h:form>
+                            </div>
+
+                            <div class="row justify-content-center mt-3">
+                                <h3>OR enter a username</h3>
+                            </div>
+                            <div class="row justify-content-center">
+                                <h:form>
+                                    <div class="form-group">
+                                        <h:outputLabel value="Username"/>
+                                        <h:inputText title="username" id="username" class="form-control"
+                                                     validator="#{suspendUserMBean.isExistingUser}"
+                                                     value="#{suspendUserMBean.username}"/>
+                                        <p class="text-right errMsg">&nbsp;<h:message for="username"/></p>
+                                        <h:commandButton id="chooseManual" value="Unsuspend" class="btn btn-primary btn-sm" action="#{suspendUserMBean.unsuspendUser()}"/>
+                                    </div>                    
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+
+        <!-- no footer -->
+        <ui:define name="footer">       
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Admin</title>
+    </h:head>
+    <ui:composition template="../template/base.xhtml">
+        <!-- side nav bar -->
+        <ui:define name="leftnav">
+            <ui:include src="../template/leftnavadmin.xhtml" />
+        </ui:define>
+
+        <ui:define name="header">
+            <div class="justify-content-center row">
+                <h:graphicImage library="images" name="castle.png" class="img-fluid"/>
+            </div>
+            <div class="justify-content-center row">
+                <h1 class="">ADMIN PANEL</h1>
+            </div>
+        </ui:define>
+
+        <ui:define name="content">
+            <div class="row justify-content-center">
+                Welcome ADMIN
+            </div>
+            <div class="row justify-content-center mt-3">
+                <a href="/Fiefdom-war/index.xhtml" class="btn btn-primary btn-lrg">back to main menu</a>
+            </div>
+        </ui:define>
+
+        <!-- no footer -->
+        <ui:define name="footer">       
+        </ui:define>
+    </ui:composition>
+</html>
+

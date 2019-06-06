@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <navigation-rule>
+        <description>Index login</description>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>UserSuccess</from-outcome>
+            <to-view-id>/userandsuspended/main.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>AdminSuccess</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/authFail.html</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Signup</description>
+        <from-view-id>/sign_up.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>UserSuccess</from-outcome>
+            <to-view-id>/user/sign_up_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/sign_up_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Account Settings</description>
+        <from-view-id>/user/account.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Deleted</from-outcome>
+            <to-view-id>/delete_self_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Notdeleted</from-outcome>
+            <to-view-id>/user/account.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Create Article</description>
+        <from-view-id>/admin/create_article.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/admin/create_article_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/admin/create_article_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Delete Article</description>
+        <from-view-id>/admin/delete_article.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/admin/delete_article_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/admin/delete_article_failure.xhhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Delete User</description>
+        <from-view-id>/admin/delete_user.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/admin/delete_user_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/admin/delete_user_failure.xhhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Update User</description>
+        <from-view-id>/admin/update_user.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/admin/update_user_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/admin/update_user_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <description>Change Password User</description>
+        <from-view-id>/user/change_pw.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/user/change_pw_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/user/change_pw_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <description>User Suspension</description>
+        <from-view-id>/admin/suspend_user.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>SuspendSuccess</from-outcome>
+            <to-view-id>/admin/suspend_user_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>SuspendFailure</from-outcome>
+            <to-view-id>/admin/suspend_user_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>UnsuspendSuccess</from-outcome>
+            <to-view-id>/admin/unsuspend_user_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>UnsuspendFailure</from-outcome>
+            <to-view-id>/admin/unsuspend_user_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+	
+	<navigation-rule>
+        <description>Build Buildings</description>
+        <from-view-id>/user/buildings.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/user/buildings_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/user/buildings_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+	
+	<navigation-rule>
+        <description>Exploration</description>
+        <from-view-id>/user/explore.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/user/explore_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/user/explore_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+	
+	<navigation-rule>
+        <description>Army Recruitment</description>
+        <from-view-id>/user/recruit_army.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/user/recruit_army_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/user/recruit_army_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+	
+	<navigation-rule>
+        <description>Compose Message</description>
+        <from-view-id>/user/create_message.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/user/create_message_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/user/create_message_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+	
+	<navigation-rule>
+        <description>Message thread replies</description>
+        <from-view-id>/user/message.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/user/create_message_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/user/create_message_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+		<navigation-case>
+            <from-outcome>DeleteSuccess</from-outcome>
+            <to-view-id>/user/message_delete_success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>DeleteFailure</from-outcome>
+            <to-view-id>/user/message_delete_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+	
+	<navigation-rule>
+        <description>War</description>
+        <from-view-id>/user/war.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Failure</from-outcome>
+            <to-view-id>/user/war_failure.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

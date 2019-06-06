@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:body>
+        <ui:composition>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/admin/admin.xhtml">Admin Home</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/admin/create_article.xhtml">Create Article</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/admin/delete_article.xhtml">Delete Article</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/admin/update_user.xhtml">Update User</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/admin/delete_user.xhtml">Delete User</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/admin/view_user.xhtml">View User</a>
+            <a class="btn btn-outline-secondary btn-block" href="/Fiefdom-war/admin/suspend_user.xhtml">Suspend User</a>
+            <div style="padding: 6px 0px 6px 0px">
+                <h:form>
+                    <h:commandButton value="Logout" action="#{loginMBean.logout()}"  class="btn btn-outline-warning btn-block"/>           
+                </h:form>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+

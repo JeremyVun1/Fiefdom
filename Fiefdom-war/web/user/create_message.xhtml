@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Create Message</title>
+    </h:head>
+    <ui:composition template="../template/base.xhtml">
+        <!-- side nav bar -->
+        <ui:define name="leftnav">
+            <ui:include src="../template/leftnavgame.xhtml" />
+        </ui:define>
+
+        <ui:define name="header">
+            <div class="justify-content-center row">
+                <h:graphicImage library="images" name="castle.png" class="img-fluid"/>
+            </div>
+        </ui:define>
+
+        <ui:define name="content">
+            <div class="row justify-content-center">
+                <h1>Compose Message</h1>
+            </div>
+
+            <!-- CREATE MESSAGE FORM -->
+            <div class="row justify-content-center">
+                <h:form style="width: 80%">
+					<!-- TYPE -->
+					<div class="form-group">
+						<h:outputLabel value="Type:"/>
+						<h:selectOneMenu id="msgtype" value="#{composeMBean.type}" class="form-control" validator="#{composeMBean.isValidType}">
+							<f:selectItems value="#{composeMBean.messageTypes}" />
+							<f:attribute name="toFId" value="#{toFId}"/>
+						</h:selectOneMenu>
+						<p class="text-right errMsg">&nbsp;<h:message for="msgtype"/></p>
+					</div>
+					
+					<!-- TO -->
+					<div class="form-group">
+						<h:outputLabel value="To (id of recipient):"/>
+						<h:inputText title="to" id="to" class="form-control"
+									 validator="#{composeMBean.isValidFiefdomId}"
+									 size="5"
+									 binding="#{toFId}"
+									 value="#{composeMBean.to}">
+						</h:inputText>
+						<p class="text-right errMsg">&nbsp;<h:message for="to"/></p>
+					</div>
+					
+					<!-- SUBJECT -->
+					<div class="form-group">
+						<h:outputLabel value="Subject:"/>
+						<h:inputText title="subject" id="subject" class="form-control"
+									 size="15"
+									 value="#{composeMBean.subject}">
+						</h:inputText>
+
+						<p class="text-right errMsg">&nbsp;<h:message for="subject"/></p>
+					</div>
+
+					<!-- BODY -->
+					<div class="form-group">
+						<h:outputLabel value="Body:"/>
+						<h:inputTextarea id="body" value="#{composeMBean.body}" class="form-control" rows="10"/>
+						<p class="text-right errMsg">&nbsp;<h:message for="body"/></p>
+					</div>
+
+                    <p></p>
+
+                    <h:commandButton id="submit" value="Send" class="btn btn-primary btn-sm" action="#{composeMBean.send()}"/>
+                    &nbsp;
+                    <h:commandButton type="reset" class="btn btn-primary btn-sm" value="Reset"/>
+
+                </h:form>
+
+            </div>
+        </ui:define>
+
+        <!-- no footer -->
+        <ui:define name="footer">       
+        </ui:define>
+    </ui:composition>
+</html>
+

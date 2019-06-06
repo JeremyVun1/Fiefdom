@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/template/base.xhtml">
+            <!-- side nav bar -->
+            <ui:define name="leftnav">
+                <ui:include src="/template/leftnavgame.xhtml" />
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="row justify-content-center">
+                    <h1>Success!</h1>
+                </div>
+
+                <div class="row justify-content-center pt-5">
+                    <p>Password has been changed!</p>
+                </div>
+            </ui:define>
+            
+            <ui:define name="footer"></ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+
